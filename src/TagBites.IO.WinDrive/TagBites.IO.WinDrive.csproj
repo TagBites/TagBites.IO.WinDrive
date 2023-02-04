@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Targets -->
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+  </PropertyGroup>
+
+  <!-- Build -->
+  <PropertyGroup>
+    <RootNamespace>TagBites.IO</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- References -->
+  <Choose>
+    <When Condition="'$(SolutionName)' == 'TagBites.IO'">
+      <ItemGroup>
+        <ProjectReference Include="$(SolutionDir)\src\TagBites.IO\TagBites.IO.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="TagBites.IO" Version="1.2.0" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  
+  <ItemGroup>
+    <PackageReference Include="DokanNet" Version="2.0.5.1" />
+  </ItemGroup>
+  
+  <!-- Usings -->
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.IO" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Threading.Tasks" />
+    <Using Include="TagBites.Utils" />
+    <Using Include="JetBrains.Annotations" />
+  </ItemGroup>
+
+  <!-- Code -->
+  <ItemGroup Condition="'$(Configuration)' != 'Debug'" >
+    <Compile Remove="Program.cs" />
+  </ItemGroup>
+
+</Project>
